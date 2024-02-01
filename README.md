@@ -1,5 +1,7 @@
 # A simple package for generate sitemap xml.
 
+Run command: `composer require ilegion/sitemap`.
+
 ## Create a sitemap.
 
 ```php
