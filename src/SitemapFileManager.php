@@ -83,7 +83,7 @@ class SitemapFileManager
     private function createDirectory(): void
     {
         if (!file_exists(dirname($this->path))) {
-            mkdir($this->path, 0755, true);
+            mkdir(dirname($this->path), 0755, true);
         }
     }
 
