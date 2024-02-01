@@ -4,6 +4,7 @@
 
 ```php
 use ilegion\Sitemap\Sitemap;
+use ilegion\Sitemap\Tags\Url;
 use ilegion\Sitemap\Enums\ChangeFreq;
 
 Sitemap::create()
