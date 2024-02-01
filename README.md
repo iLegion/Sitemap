@@ -3,7 +3,7 @@
 ## Create a basic sitemap.
 
 ```php
-use ilegionxs\Sitemap\Sitemap;
+use ilegion\Sitemap\Sitemap;
 
 Sitemap::create()
     ->add('https://sitemap.test')
@@ -18,9 +18,9 @@ Sitemap::create()
 ## Create a basic sitemap using Url.
 
 ```php
-use ilegionxs\Sitemap\Sitemap;
-use ilegionxs\Sitemap\Tags\Url;
-use ilegionxs\Sitemap\Enums\ChangeFreq;
+use ilegion\Sitemap\Sitemap;
+use ilegion\Sitemap\Tags\Url;
+use ilegion\Sitemap\Enums\ChangeFreq;
 
 Sitemap::create()
     ->add(Url::create('https://sitemap.test'))
@@ -35,8 +35,8 @@ Sitemap::create()
 ## Create a basic sitemap index.
 
 ```php
-use ilegionxs\Sitemap\SitemapIndex;
-use ilegionxs\Sitemap\Tags\Sitemap;
+use ilegion\Sitemap\SitemapIndex;
+use ilegion\Sitemap\Tags\Sitemap;
 
 SitemapIndex::create()
     ->add('https://sitemap.test/sitemap/sitemap.xml')
