@@ -1,5 +1,5 @@
 {
-    "name": "ilegionxs/sitemap",
+    "name": "ilegion/sitemap",
     "description": "A simple package for generate sitemap xml.",
     "license": "MIT",
     "keywords": [
@@ -7,7 +7,7 @@
         "sitemap",
         "laravel-sitemap"
     ],
-    "version": "0.0.1-dev",
+    "version": "0.0.2-dev",
     "autoload": {
         "psr-4": {
             "Ilegionxs\\Sitemap\\": "src/"
