@@ -7,10 +7,10 @@
         "sitemap",
         "laravel-sitemap"
     ],
-    "version": "0.0.2-dev",
+    "version": "0.0.3-dev",
     "autoload": {
         "psr-4": {
-            "Ilegionxs\\Sitemap\\": "src/"
+            "ilegion\\Sitemap\\": "src/"
         },
         "classmap": ["src/"]
     },

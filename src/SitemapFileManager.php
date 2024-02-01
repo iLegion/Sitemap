@@ -1,6 +1,6 @@
 <?php
 
-namespace ilegionxs\Sitemap;
+namespace ilegion\Sitemap;
 
 /**
  * @description Service for generation sitemap files for many languages with buffer saver.

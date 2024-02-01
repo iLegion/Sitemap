@@ -1,6 +1,6 @@
 <?php
 
-namespace ilegionxs\Sitemap;
+namespace ilegion\Sitemap;
 
 use Illuminate\Support\ServiceProvider;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace ilegionxs\Sitemap;
+namespace ilegion\Sitemap;
 
-use ilegionxs\Sitemap\Exceptions\InvalidPath;
-use ilegionxs\Sitemap\Tags\Url;
+use ilegion\Sitemap\Exceptions\InvalidPath;
+use ilegion\Sitemap\Tags\Url;
 
 class Sitemap
 {

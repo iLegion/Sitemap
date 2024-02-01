@@ -1,6 +1,6 @@
 <?php
 
-namespace ilegionxs\Sitemap\Enums;
+namespace ilegion\Sitemap\Enums;
 
 enum ChangeFreq: string
 {

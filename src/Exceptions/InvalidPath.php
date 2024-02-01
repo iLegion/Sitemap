@@ -1,6 +1,6 @@
 <?php
 
-namespace ilegionxs\Sitemap\Exceptions;
+namespace ilegion\Sitemap\Exceptions;
 
 use Exception;
 use Throwable;

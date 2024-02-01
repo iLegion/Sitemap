@@ -1,8 +1,8 @@
 <?php
 
-namespace ilegionxs\Sitemap\Tags;
+namespace ilegion\Sitemap\Tags;
 
-use ilegionxs\Sitemap\Enums\ChangeFreq;
+use ilegion\Sitemap\Enums\ChangeFreq;
 
 class Url
 {

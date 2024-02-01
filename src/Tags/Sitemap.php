@@ -1,6 +1,6 @@
 <?php
 
-namespace ilegionxs\Sitemap\Tags;
+namespace ilegion\Sitemap\Tags;
 
 class Sitemap
 {
