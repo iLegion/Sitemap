@@ -1,7 +1,7 @@
 <?php
 
-use ilegionxs\Sitemap\Exceptions\InvalidPath;
-use ilegionxs\Sitemap\SitemapIndex;
+use ilegion\Sitemap\Exceptions\InvalidPath;
+use ilegion\Sitemap\SitemapIndex;
 use PHPUnit\Framework\TestCase;
 
 class SitemapIndexTest extends TestCase
@@ -15,7 +15,7 @@ class SitemapIndexTest extends TestCase
         $path = '/var/www/storage/app/sitemap/sitemap-index.xml';
 
         SitemapIndex::create()
-            ->add('https://sitemap1.test')
+            ->add('https://sitemap.test')
             ->save($path);
 
         $this->assertFileExists($path);

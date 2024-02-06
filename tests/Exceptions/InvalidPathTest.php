@@ -2,8 +2,8 @@
 
 namespace Exceptions;
 
-use ilegionxs\Sitemap\Exceptions\InvalidPath;
-use ilegionxs\Sitemap\Sitemap;
+use ilegion\Sitemap\Exceptions\InvalidPath;
+use ilegion\Sitemap\Sitemap;
 use PHPUnit\Framework\TestCase;
 
 class InvalidPathTest extends TestCase
@@ -17,7 +17,7 @@ class InvalidPathTest extends TestCase
         $this->expectException(InvalidPath::class);
 
         Sitemap::create()
-            ->add('https://sitemap1.test')
+            ->add('https://sitemap.test')
             ->save('');
     }
 }

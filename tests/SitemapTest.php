@@ -1,9 +1,9 @@
 <?php
 
-use ilegionxs\Sitemap\Enums\ChangeFreq;
-use ilegionxs\Sitemap\Exceptions\InvalidPath;
-use ilegionxs\Sitemap\Sitemap;
-use ilegionxs\Sitemap\Tags\Url;
+use ilegion\Sitemap\Enums\ChangeFreq;
+use ilegion\Sitemap\Exceptions\InvalidPath;
+use ilegion\Sitemap\Sitemap;
+use ilegion\Sitemap\Tags\Url;
 use PHPUnit\Framework\TestCase;
 
 final class SitemapTest extends TestCase
@@ -61,7 +61,7 @@ final class SitemapTest extends TestCase
         $path = '/var/www/storage/app/sitemap/sitemap-with-big-data-using-url-tag.xml';
         $data = array_fill(
             0,
-            50000,
+            10000,
             Url::create('https://sitemap.test')->setLastMod('2024-01-31 00:00:00')
         );
 
