@@ -4,10 +4,20 @@ namespace ilegion\Sitemap;
 
 use ilegion\Sitemap\Exceptions\InvalidPath;
 use ilegion\Sitemap\Tags\Url;
+use ilegion\Sitemap\Tags\UrlSet;
 
 class Sitemap
 {
-    private array $records = [];
+    private UrlSet $urlSet;
+
+    private bool $hasImages = false;
+
+    private bool $hasVideos = false;
+
+    public function __construct()
+    {
+        $this->urlSet = UrlSet::create();
+    }
 
     public static function create(): static
     {
@@ -20,9 +30,12 @@ class Sitemap
 
         foreach ($urls as $item) {
             if ($item instanceof Url) {
-                $this->records[] = $item;
+                $this->urlSet->add($item);
+
+                if ($item->hasImages()) $this->hasImages = true;
+                if ($item->hasVideos()) $this->hasVideos = true;
             } else if (is_string($item)) {
-                $this->records[] = new Url($item);
+                $this->urlSet->add(new Url($item));
             }
         }
 
@@ -38,36 +51,9 @@ class Sitemap
             throw new InvalidPath();
         }
 
-        $fileManager = SitemapFileManager::create($path, $gzip)->appendTextToFile(self::getHeaderText());
-
-        foreach ($this->records as $record) {
-            $fileManager->appendTextToFile($record->generate());
-        }
-
-        return $fileManager
-            ->appendTextToFile(self::getFooterText())
+        return  SitemapFileManager::create($path, $gzip)
+            ->appendTextToFile("<?xml version='1.0' encoding='UTF-8'?> \r\n")
+            ->appendTextToFile($this->urlSet->generate($this->hasImages, $this->hasVideos))
             ->close();
-    }
-
-    /**
-     * @description Nowdoc text version of header.
-     */
-    private static function getHeaderText(): string
-    {
-        return <<<'EOD'
-        <?xml version="1.0" encoding="UTF-8"?>
-        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        EOD;
-    }
-
-    /**
-     * @description Nowdoc text version of footer.
-     */
-    private static function getFooterText(): string
-    {
-        return <<<'EOD'
-
-        </urlset>
-        EOD;
     }
 }

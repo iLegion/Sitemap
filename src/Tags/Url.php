@@ -4,16 +4,8 @@ namespace ilegion\Sitemap\Tags;
 
 use ilegion\Sitemap\Enums\ChangeFreq;
 
-class Url
+class Url extends Tag
 {
-    public const CHANGE_FREQ_ALWAYS = 'always';
-    public const CHANGE_FREQ_HOURLY = 'hourly';
-    public const CHANGE_FREQ_DAILY = 'daily';
-    public const CHANGE_FREQ_WEEKLY = 'weekly';
-    public const CHANGE_FREQ_MONTHLY = 'monthly';
-    public const CHANGE_FREQ_YEARLY = 'yearly';
-    public const CHANGE_FREQ_NEVER = 'never';
-
     private string $loc;
 
     private ?string $lastMod = null;
@@ -21,6 +13,16 @@ class Url
     private ?ChangeFreq $changeFreq = null;
 
     private ?string $priority = null;
+
+    /**
+     * @var Image[]
+     */
+    private array $images = [];
+
+    /**
+     * @var Video[]
+     */
+    private array $videos = [];
 
     public function __construct(string $url)
     {
@@ -32,11 +34,14 @@ class Url
         return new static($url);
     }
 
-    public function setLoc(string $value): static
+    public function hasImages(): bool
     {
-        $this->loc = $value;
+        return !!$this->images;
+    }
 
-        return $this;
+    public function hasVideos(): bool
+    {
+        return !!$this->videos;
     }
 
     public function setLastMod(string $value): static
@@ -60,26 +65,38 @@ class Url
         return $this;
     }
 
+    public function addImage(Image $image): static
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    public function addVideo(Video $video): static
+    {
+        $this->videos[] = $video;
+
+        return $this;
+    }
+
     public function generate(): string
     {
-        $result = <<<END
+        $result = "\t<url>\r\n";
+        $result .= $this->formatTag('loc', $this->loc, tabs: 2);
+        $result .= $this->formatTag('lastmod', $this->lastMod, tabs: 2);
+        $result .= $this->formatTag('changefreq', $this->changeFreq?->value, tabs: 2);
+        $result .= $this->formatTag('priority', $this->priority, tabs: 2);
 
-            <url>
-                <loc>$this->loc</loc>
-        END;
-
-        if ($this->lastMod) {
-            $result .= "\r\n        <lastmod>$this->lastMod</lastmod>";
+        foreach ($this->images as $image) {
+            $result .= "\t {$image->generate()}";
         }
 
-        if ($this->changeFreq) {
-            $result .= "\r\n        <changefreq>{$this->changeFreq->value}</changefreq>";
+        foreach ($this->videos as $video) {
+            $result .= "\t {$video->generate()}";
         }
 
-        if ($this->priority) {
-            $result .= "\r\n        <priority>$this->priority</priority>";
-        }
+        $result .= "\t</url>\r\n";
 
-        return $result .= "\r\n   </url>";
+        return $result;
     }
 }

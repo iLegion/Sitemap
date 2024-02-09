@@ -2,7 +2,7 @@
 
 namespace ilegion\Sitemap\Tags;
 
-class Sitemap
+class Sitemap extends Tag
 {
     private string $loc;
 
@@ -18,13 +18,6 @@ class Sitemap
         return new static($url);
     }
 
-    public function setLoc(string $value): static
-    {
-        $this->loc = $value;
-
-        return $this;
-    }
-
     public function setLastMod(string $value): static
     {
         $this->lastMod = $value;
@@ -34,16 +27,11 @@ class Sitemap
 
     public function generate(): string
     {
-        $result = <<<END
+        $result = "<sitemap>\r\n";
+        $result .= $this->formatTag('loc', $this->loc);
+        $result .= $this->formatTag('lastmod', $this->lastMod);
+        $result .= "</sitemap>";
 
-            <sitemap>
-                <loc>$this->loc</loc>
-        END;
-
-        if ($this->lastMod) {
-            $result .= "\r\n        <lastmod>$this->lastMod</lastmod>";
-        }
-
-        return $result .= "\r\n   </sitemap>";
+        return $result;
     }
 }
