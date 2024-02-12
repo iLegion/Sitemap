@@ -24,6 +24,11 @@ class Url extends Tag
      */
     private array $videos = [];
 
+    /**
+     * @var News[]
+     */
+    private array $news = [];
+
     public function __construct(string $url)
     {
         $this->loc = $url;
@@ -42,6 +47,11 @@ class Url extends Tag
     public function hasVideos(): bool
     {
         return !!$this->videos;
+    }
+
+    public function hasNews(): bool
+    {
+        return !!$this->news;
     }
 
     public function setLastMod(string $value): static
@@ -79,6 +89,13 @@ class Url extends Tag
         return $this;
     }
 
+    public function addNews(News $news): static
+    {
+        $this->news[] = $news;
+
+        return $this;
+    }
+
     public function generate(): string
     {
         $result = "\t<url>\r\n";
@@ -93,6 +110,10 @@ class Url extends Tag
 
         foreach ($this->videos as $video) {
             $result .= "\t {$video->generate()}";
+        }
+
+        foreach ($this->news as $news) {
+            $result .= "\t {$news->generate()}";
         }
 
         $result .= "\t</url>\r\n";

@@ -2,7 +2,7 @@
 
 namespace ilegion\Sitemap\Tags;
 
-class Tag
+abstract class Tag implements \ilegion\Sitemap\Interfaces\Tag
 {
     protected function formatTag(string $tagName, $value, string $attrs = '', int $tabs = 1): string
     {

@@ -10,6 +10,8 @@ class UrlSet extends Tag
 
     private const VIDEO_URL = 'http://www.google.com/schemas/sitemap-video/1.1';
 
+    private const NEWS_URL = 'http://www.google.com/schemas/sitemap-news/0.9';
+
     /**
      * @var Url[]
      */
@@ -27,11 +29,12 @@ class UrlSet extends Tag
         return $this;
     }
 
-    public function generate($enableImage = false, $enableVideo = false): string
+    public function generate($enableImage = false, $enableVideo = false, $enableNews = false): string
     {
         $url = self::URL;
         $imageUrl = self::IMAGE_URL;
         $videoUrl = self::VIDEO_URL;
+        $newsUrl = self::NEWS_URL;
 
         $result = "<urlset xmlns='$url'";
 
@@ -41,6 +44,10 @@ class UrlSet extends Tag
 
         if ($enableVideo) {
             $result .= " xmlns:video='$videoUrl'";
+        }
+
+        if ($enableNews) {
+            $result .= " xmlns:news='$newsUrl'";
         }
 
         $result .= ">\r\n";
