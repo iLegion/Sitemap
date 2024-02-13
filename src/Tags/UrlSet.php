@@ -12,6 +12,8 @@ class UrlSet extends Tag
 
     private const NEWS_URL = 'http://www.google.com/schemas/sitemap-news/0.9';
 
+    private const LOCALIZATION_URL = 'http://www.w3.org/1999/xhtml';
+
     /**
      * @var Url[]
      */
@@ -29,12 +31,13 @@ class UrlSet extends Tag
         return $this;
     }
 
-    public function generate($enableImage = false, $enableVideo = false, $enableNews = false): string
+    public function generate($enableImage = false, $enableVideo = false, $enableNews = false, $enableLocalization = false): string
     {
         $url = self::URL;
         $imageUrl = self::IMAGE_URL;
         $videoUrl = self::VIDEO_URL;
         $newsUrl = self::NEWS_URL;
+        $localizationUrl = self::LOCALIZATION_URL;
 
         $result = "<urlset xmlns='$url'";
 
@@ -48,6 +51,10 @@ class UrlSet extends Tag
 
         if ($enableNews) {
             $result .= " xmlns:news='$newsUrl'";
+        }
+
+        if ($enableLocalization) {
+            $result .= " xmlns:xhtml='$localizationUrl'";
         }
 
         $result .= ">\r\n";

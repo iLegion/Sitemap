@@ -16,6 +16,8 @@ class Sitemap
 
     private bool $hasNews = false;
 
+    private bool $hasLocalizations = false;
+
     public function __construct()
     {
         $this->urlSet = UrlSet::create();
@@ -37,6 +39,7 @@ class Sitemap
                 if ($item->hasImages()) $this->hasImages = true;
                 if ($item->hasVideos()) $this->hasVideos = true;
                 if ($item->hasNews()) $this->hasNews = true;
+                if ($item->hasLocalizations()) $this->hasLocalizations = true;
             } else if (is_string($item)) {
                 $this->urlSet->add(new Url($item));
             }
@@ -56,7 +59,7 @@ class Sitemap
 
         return SitemapFileManager::create($path, $gzip)
             ->appendTextToFile("<?xml version='1.0' encoding='UTF-8'?> \r\n")
-            ->appendTextToFile($this->urlSet->generate($this->hasImages, $this->hasVideos, $this->hasNews))
+            ->appendTextToFile($this->urlSet->generate($this->hasImages, $this->hasVideos, $this->hasNews, $this->hasLocalizations))
             ->close();
     }
 }

@@ -29,6 +29,11 @@ class Url extends Tag
      */
     private array $news = [];
 
+    /**
+     * @var Link[]
+     */
+    private array $localizations = [];
+
     public function __construct(string $url)
     {
         $this->loc = $url;
@@ -52,6 +57,11 @@ class Url extends Tag
     public function hasNews(): bool
     {
         return !!$this->news;
+    }
+
+    public function hasLocalizations(): bool
+    {
+        return !!$this->localizations;
     }
 
     public function setLastMod(string $value): static
@@ -96,6 +106,13 @@ class Url extends Tag
         return $this;
     }
 
+    public function addLocalization(Link $link): static
+    {
+        $this->localizations[] = $link;
+
+        return $this;
+    }
+
     public function generate(): string
     {
         $result = "\t<url>\r\n";
@@ -114,6 +131,10 @@ class Url extends Tag
 
         foreach ($this->news as $news) {
             $result .= "\t {$news->generate()}";
+        }
+
+        foreach ($this->localizations as $localization) {
+            $result .= "\t {$localization->generate()}";
         }
 
         $result .= "\t</url>\r\n";
